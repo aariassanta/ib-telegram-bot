@@ -1,0 +1,17 @@
+services:
+  ib-telegram-bot:
+    build: .
+    container_name: ib-telegram-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - AUTHORIZED_USER_IDS=${AUTHORIZED_USER_IDS}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - ib-trading-app_default
+
+networks:
+  ib-trading-app_default:
+    external: true
